@@ -18,3 +18,9 @@ https://www.terraform.io/downloads-
 - Manage Jenkins -> Global Tools Configuration
 
 ![image](https://user-images.githubusercontent.com/14828358/149135843-8455ca07-a8c4-4e1b-bbfa-6f2f2d5c922d.png)
+
+## Managing aws credentials
+
+![image](https://user-images.githubusercontent.com/14828358/149148516-82dd098b-dd7c-4032-a959-f7a6194a290e.png)
+
+![image](https://user-images.githubusercontent.com/14828358/149151169-e6d8c11d-01bb-4d07-a320-3dc356ffa6bb.png)
