@@ -15,5 +15,6 @@
 https://www.terraform.io/downloads-
 
 - After installing, go to manage plugins and specify path to the binary
+- Manage Jenkins -> Global Tools Configuration
 
-![image](https://user-images.githubusercontent.com/14828358/149135613-9fe7f7d9-a69a-407d-9897-8c4fe73507e2.png)
+![image](https://user-images.githubusercontent.com/14828358/149135843-8455ca07-a8c4-4e1b-bbfa-6f2f2d5c922d.png)
