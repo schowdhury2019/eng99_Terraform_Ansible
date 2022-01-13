@@ -10,7 +10,7 @@
 
 ![image](https://user-images.githubusercontent.com/14828358/149134571-85bf5605-03e1-44b7-8625-4a246bd5a224.png)
 
-## Download Terraform
+## Download Terraform and Ansible
 
 https://www.terraform.io/downloads-
 
@@ -18,6 +18,9 @@ https://www.terraform.io/downloads-
 - Manage Jenkins -> Global Tools Configuration
 
 ![image](https://user-images.githubusercontent.com/14828358/149135843-8455ca07-a8c4-4e1b-bbfa-6f2f2d5c922d.png)
+
+- Do the same for Ansible
+![image](https://user-images.githubusercontent.com/14828358/149310433-4bf825ac-108b-4dd6-994c-83227d089249.png)
 
 ## Managing aws credentials
 
