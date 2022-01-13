@@ -201,9 +201,5 @@ output "db_ip" {
 #[db]
 #ec2-instance ansible_host=$(terraform output db_ip) ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/eng99.pem
 
-
-
-
-
 # terraform plan
 # terraform apply
