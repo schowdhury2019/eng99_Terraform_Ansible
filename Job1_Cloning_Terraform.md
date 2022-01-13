@@ -4,4 +4,4 @@
 - Create new job
 - Select Pipeline instead of freestyle
 
-![image](https://user-images.githubusercontent.com/14828358/149195928-473088c9-91e8-4b0c-b043-bb8e5d03b24c.png)
+![image](https://user-images.githubusercontent.com/14828358/149346517-e06cdcec-c28b-4dde-a6c7-b2f469f5c65d.png)
