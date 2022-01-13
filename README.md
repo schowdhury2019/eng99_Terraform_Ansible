@@ -29,11 +29,5 @@ https://www.terraform.io/downloads-
 ![image](https://user-images.githubusercontent.com/14828358/149151169-e6d8c11d-01bb-4d07-a320-3dc356ffa6bb.png)
 
 
-## Cloning terraform repo and running it on jenkins instance
-
-- Create new job
-- Select Pipeline instead of freestyle
-
-![image](https://user-images.githubusercontent.com/14828358/149195928-473088c9-91e8-4b0c-b043-bb8e5d03b24c.png)
 
 
