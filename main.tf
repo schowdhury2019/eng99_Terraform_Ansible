@@ -33,13 +33,13 @@ resource "aws_subnet" "Public" {
 }
 
 # Private Subnet
-resource "aws_subnet" "Private" {
-  vpc_id     = aws_vpc.Sunny_vpc.id
-  cidr_block = var.aws_private_cidr
-  tags = {
-    Name = "Private Subnet"
-  }
-}
+# resource "aws_subnet" "Private" {
+#   vpc_id     = aws_vpc.Sunny_vpc.id
+#   cidr_block = var.aws_private_cidr
+#   tags = {
+#     Name = "Private Subnet"
+#   }
+# }
 
 # -------- RT ---------------
 
@@ -56,16 +56,16 @@ resource "aws_route_table" "Public_RT" {
 }
 
 # Private Routing Table
-resource "aws_route_table" "Private_RT" {
-  vpc_id = aws_vpc.Sunny_vpc.id
-  route {
-    cidr_block = var.internet
-    gateway_id = aws_internet_gateway.igw.id
-  }
-  tags = {
-    Name = var.private_route_table
-  }
-}
+# resource "aws_route_table" "Private_RT" {
+#   vpc_id = aws_vpc.Sunny_vpc.id
+#   route {
+#     cidr_block = var.internet
+#     gateway_id = aws_internet_gateway.igw.id
+#   }
+#   tags = {
+#     Name = var.private_route_table
+#   }
+# }
 
 # Associating Public Subnet to routing table
 resource "aws_route_table_association" "public" {
@@ -74,10 +74,10 @@ resource "aws_route_table_association" "public" {
 }
 
 # Associating Private Subnet to routing table
-resource "aws_route_table_association" "private" {
-  subnet_id      = aws_subnet.Private.id
-  route_table_id = aws_route_table.Private_RT.id
-}
+# resource "aws_route_table_association" "private" {
+#   subnet_id      = aws_subnet.Private.id
+#   route_table_id = aws_route_table.Private_RT.id
+# }
 
 # -------- SG ---------------
 
@@ -115,6 +115,15 @@ resource "aws_security_group_rule" "app_ssh" {
   security_group_id = aws_security_group.public.id
 }
 
+resource "aws_security_group_rule" "app_all" {
+  type              = "ingress"
+  protocol          = "-1"
+  from_port         = "0"
+  to_port           = "0"
+  cidr_blocks       = [var.internet]
+  security_group_id = aws_security_group.public.id
+}
+
 resource "aws_security_group_rule" "app_outbound" {
   type              = "egress"
   protocol          = "-1"
@@ -124,38 +133,38 @@ resource "aws_security_group_rule" "app_outbound" {
   security_group_id = aws_security_group.public.id
 }
 
-resource "aws_security_group_rule" "db" {
-  type              = "ingress"
-  protocol          = "tcp"
-  from_port         = "0"
-  to_port           = "27017"
-  cidr_blocks       = [var.aws_public_cidr]
-  security_group_id = aws_security_group.private.id
-}
+# resource "aws_security_group_rule" "db" {
+#   type              = "ingress"
+#   protocol          = "tcp"
+#   from_port         = "0"
+#   to_port           = "27017"
+#   cidr_blocks       = [var.aws_public_cidr]
+#   security_group_id = aws_security_group.private.id
+# }
 
-resource "aws_security_group_rule" "db_outbound" {
-  type              = "egress"
-  protocol          = "-1"
-  from_port         = "0"
-  to_port           = "0"
-  cidr_blocks       = [var.internet]
-  security_group_id = aws_security_group.private.id
-}
+# resource "aws_security_group_rule" "db_outbound" {
+#   type              = "egress"
+#   protocol          = "-1"
+#   from_port         = "0"
+#   to_port           = "0"
+#   cidr_blocks       = [var.internet]
+#   security_group_id = aws_security_group.private.id
+# }
 
 # -------- Instances ---------------
 
-# Controller Instance
-resource "aws_instance" "controller_instance" {
-  ami                         = var.app_ami_id
-  subnet_id                   = aws_subnet.Public.id
-  instance_type               = var.aws_instance_type
-  security_groups             = [aws_security_group.public.id]
-  associate_public_ip_address = true
-  tags = {
-    Name = var.controller_name
-  }
-  key_name = var.aws_key
-}
+# # Controller Instance
+# resource "aws_instance" "controller_instance" {
+#   ami                         = var.app_ami_id
+#   subnet_id                   = aws_subnet.Public.id
+#   instance_type               = var.aws_instance_type
+#   security_groups             = [aws_security_group.public.id]
+#   associate_public_ip_address = true
+#   tags = {
+#     Name = var.controller_name
+#   }
+#   key_name = var.aws_key
+# }
 
 
 # App Instance
@@ -177,9 +186,9 @@ resource "aws_instance" "app_instance" {
 # DB Instance
 resource "aws_instance" "db_instance" {
   ami                         = var.app_ami_id
-  subnet_id                   = aws_subnet.Private.id
+  subnet_id                   = aws_subnet.Public.id
   instance_type               = var.aws_instance_type
-  security_groups             = [aws_security_group.private.id]
+  security_groups             = [aws_security_group.public.id]
   associate_public_ip_address = true
   tags = {
     Name = var.db_name
