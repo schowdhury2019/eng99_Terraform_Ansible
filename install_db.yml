@@ -9,6 +9,6 @@
      - name: Replace config file
        become: true
        shell: |
-         sudo cp /home/vagrant/db_config/mongod.conf /etc/mongod.conf
-         sudo systemctl restart mongod
-         sudo systemctl enable mongod
+        sudo cp /home/vagrant/db_config/mongod.conf /etc/mongod.conf
+        sudo systemctl restart mongod
+        sudo systemctl enable mongod

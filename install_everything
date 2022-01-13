@@ -1,5 +1,5 @@
 ---
-hosts: app
+- hosts: app
   gather_facts: true
   become: true
   tasks:
@@ -9,7 +9,6 @@ hosts: app
         dest: /home/vagrant/app
         clone: yes
         update: yes
-
 
 - name: Install DB
   import_playbook: install_db.yml
