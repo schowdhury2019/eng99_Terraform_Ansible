@@ -1,0 +1,40 @@
+---
+- hosts: app
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install nginx
+      apt: pkg=nginx state=present
+
+    - name: Installing npm
+      apt: pkg=npm state=present
+
+    - name: download Mongoose
+      npm:
+        name: mongoose
+        global: yes
+
+    - name: Install pm2
+      npm:
+        name: pm2
+        global: yes
+
+    - name: Add ENV variable
+      shell: |
+        # echo "export DB_HOST=mongodb://192.168.33.11:27017/posts" >> /home/vagrant/.bashrc
+        # source /home/vagrant/.bashrc
+        export DB_HOST="mongodb://192.168.33.11:27017/posts"
+
+    - name: Reverse Proxy
+      shell: |
+        sudo cp /home/vagrant/web_config/default /etc/nginx/sites-available/default
+        sudo systemctl restart nginx
+        sudo systemctl enable nginx
+
+    - name: seed and run app
+      shell: |
+        cd /home/vagrant/app/app
+        npm install
+        node /home/vagrant/app/app/seeds/seed.js
+        pm2 kill
+        pm2 start /home/vagrant/app/app/app.js

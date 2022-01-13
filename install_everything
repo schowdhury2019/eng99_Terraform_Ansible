@@ -1,0 +1,18 @@
+---
+hosts: app
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Clone app from git
+      git:
+        repo: https://github.com/schowdhury2019/Eng99App.git
+        dest: /home/vagrant/app
+        clone: yes
+        update: yes
+
+
+- name: Install DB
+  import_playbook: install_db.yml
+
+- name: Install app
+  import_app: install_db.yml

@@ -1,0 +1,14 @@
+---
+ - hosts: db
+   gather_facts: true
+   become: true
+   tasks:
+     - name: Install mongodb
+       apt: pkg=mongodb state=present
+
+     - name: Replace config file
+       become: true
+       shell: |
+         sudo cp /home/vagrant/db_config/mongod.conf /etc/mongod.conf
+         sudo systemctl restart mongod
+         sudo systemctl enable mongod
