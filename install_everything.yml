@@ -1,6 +1,6 @@
 ---
 - hosts: app
-  gather_facts: true
+  # gather_facts: true
   become: true
   tasks:
     - name: Clone app from git
