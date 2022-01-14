@@ -21,20 +21,20 @@
 
     - name: Add ENV variable
       shell: |
-        # echo "export DB_HOST=mongodb://192.168.33.11:27017/posts" >> /home/vagrant/.bashrc
-        # source /home/vagrant/.bashrc
+        # echo "export DB_HOST=mongodb://192.168.33.11:27017/posts" >> /home/ubuntu/.bashrc
+        # source /home/ubuntu/.bashrc
         export DB_HOST="mongodb://192.168.33.11:27017/posts"
 
     - name: Reverse Proxy
       shell: |
-        sudo cp /home/vagrant/web_config/default /etc/nginx/sites-available/default
+        sudo cp /home/ubuntu/web_config/default /etc/nginx/sites-available/default
         sudo systemctl restart nginx
         sudo systemctl enable nginx
 
     - name: seed and run app
       shell: |
-        cd /home/vagrant/app/app
+        cd /home/ubuntu/app/app
         npm install
-        node /home/vagrant/app/app/seeds/seed.js
+        node /home/ubuntu/app/app/seeds/seed.js
         pm2 kill
-        pm2 start /home/vagrant/app/app/app.js
+        pm2 start /home/ubuntu/app/app/app.js
