@@ -14,4 +14,4 @@
   import_playbook: install_db.yml
 
 - name: Install app
-  import_app: install_db.yml
+  import_playbook: install_db.yml
